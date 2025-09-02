@@ -1,0 +1,37 @@
+services:
+
+  db:
+    image: postgres
+    restart: always    
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+ 
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+#  fast_api:
+#    build: .
+#    ports: 
+#      - "8000:8000"
+#      environment:
+#        DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
+#    develop:
+#      watch:
+#        - path: .
+#          action: rebuild
+#    depends_on:
+#      - db
+
+
+volumes:
+  pgdata:
