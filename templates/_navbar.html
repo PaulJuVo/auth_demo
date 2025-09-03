@@ -1,0 +1,94 @@
+<nav class="sidebar" id="sidebar">
+  <div class="burger" id="burger" onclick="toggleMenu()">☰</div>
+
+  <ul class="navbar">
+    <li><a href="{{ url_for('read_root') }}">Home</a></li>
+    <li><a href="{{ url_for('read_guests') }}">Guests</a></li>
+    <li><a href="{{ url_for('read_root') }}">Contact</a></li>
+    <li><a href="{{ url_for('read_root') }}">Dashboard</a></li>
+  </ul>
+</nav>
+
+<style>
+  /* Sidebar (Desktop) */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #007bff; /* Blau */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar .navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar .navbar li {
+    margin: 10px 0;
+  }
+
+  .sidebar .navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: block;
+  }
+
+  .sidebar .navbar a:hover {
+    background-color: #0056b3;
+  }
+
+  /* Burger-Icon (Mobil) */
+  .burger {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+
+  /* Content-Container (mit Sidebar Abstand) */
+  .content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  /* Responsive: Hamburger Menü */
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+      width: 200px;
+      z-index: 1000;
+    }
+    .sidebar.active {
+      transform: translateX(0);
+    }
+    .burger {
+      display: block;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1100;
+    }
+    .content {
+      margin-left: 0;
+      padding: 60px 20px 20px 20px; /* Platz für Burger */
+    }
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+  }
+</script>

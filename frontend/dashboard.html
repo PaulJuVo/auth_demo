@@ -1,0 +1,22 @@
+<h1>Login-Historie</h1>
+<ul id="history"></ul>
+
+<script>
+  async function loadHistory() {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`/api/history?token=${token}`);
+    if (res.ok) {
+      const history = await res.json();
+      const list = document.getElementById("history");
+      history.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = `${item.user} - ${item.time}`;
+        list.appendChild(li);
+      });
+    } else {
+      alert("Zugriff verweigert!");
+    }
+  }
+
+  loadHistory();
+</script>

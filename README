@@ -1,2 +1,9 @@
+docker compose --env-file .env.dev up --build -d
 uvicorn app.main:app --reload
 -> für DEV
+
+
+
+pip freeze > requirements.txt
+
+docker compose --env-file .env.dev up --build -d

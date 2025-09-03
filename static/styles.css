@@ -1,0 +1,39 @@
+/* Grundlegendes Styling */
+body {
+    font-family: monospace;      /* Monospace Schrift */
+    background: hsl(0%, 0%, 90%);  /* Dunkelgrauer Hintergrund */
+    color: hsl(0%, 0%, 5%);                  /* Weißer Text für Kontrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;      /* horizontal zentrieren */
+    align-items: center;          /* vertikal zentrieren */
+    min-height: 100vh;            /* gesamte Höhe des Viewports */
+    text-align: center;
+    font-size: 14px;  
+}
+
+/* Überschrift */
+h1 {
+    color: #4f55be;
+    margin-bottom: 20px;
+    font-size: 24px;  
+}
+
+/* Absatz */
+p {
+    color: hsl(0%, 0%, 20%);
+    line-height: 1.5;
+    max-width: 600px; /* Lesbare Breite auf großen Bildschirmen */
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+}

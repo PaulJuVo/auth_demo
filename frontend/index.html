@@ -1,0 +1,30 @@
+<h1>Login</h1>
+<form id="loginForm">
+  <input type="text" id="username" placeholder="Benutzer" required />
+  <input type="password" id="password" placeholder="Passwort" required />
+  <button type="submit">Login</button>
+</form>
+<p>noch keinen account? Dann klicke <a href="/frontend/register">hier</a></p>
+<a href="/frontend/resetPassword">Passwort vergessen?</a>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem("token", data.access_token);
+      window.location.href = "/static/dashboard.html";
+    } else {
+      alert("Login fehlgeschlagen!");
+    }
+  });
+</script>
