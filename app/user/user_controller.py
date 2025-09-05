@@ -1,16 +1,22 @@
-from fastapi import Cookie, Depends, APIRouter, Request
-from models import UserCreate, UserUpdate, UserPublic
-from app.core.database import get_session
-from typing import Annotated, Generator
-from sqlmodel import Session
-
-
+from fastapi import APIRouter
+from .user_service import create_user as user_service_create_user
+from .user_models import *
+from ..core.deps import CurrentUser
 
 
 router = APIRouter()
-db_session = Annotated[Session, Depends(get_session)]
 
 
-@router.post("/users/", response_model=UserPublic)
-def create_user(user: UserCreate, db : db_session):
+@router.post("/", response_model=UserPublic)
+def create_user(user: UserCreate):
+    
+    return user_service_create_user(user)
+
+@router.get("/me/", response_model=UserPublic)
+def get_user(user : CurrentUser):
     return user
+
+@router.get("/all/", response_model=UserPublic)
+def get_all_users(user : CurrentUser):
+    return user
+    

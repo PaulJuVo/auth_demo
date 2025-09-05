@@ -2,7 +2,7 @@ from sqlmodel import Field, SQLModel
 from datetime import datetime
 
 class BaseUser(SQLModel):
-    name : str = Field(index=True)
+    name : str = Field(index=True, unique=True)
     age: int | None
     
 class User(BaseUser, table=True):

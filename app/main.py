@@ -2,10 +2,10 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
 import logging
 
-from .authentication import auth_controller as auth
+from .auth import auth_controller as auth
+from .user import user_controller
 from .core import database
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from . import templates as templates_router
 
 
@@ -18,6 +18,10 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(templates_router.router, prefix="/templates",
     tags=["templates"],)
 app.include_router(auth.router,tags=["Authentication"])
+app.include_router(user_controller.router, prefix="/users", tags=["users"])
+
+
+
 
 @app.on_event("startup")
 def on_startup():
